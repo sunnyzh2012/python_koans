@@ -11,36 +11,36 @@ class AboutSets(Koan):
         
         there_can_only_be_only_one = set(highlanders)
 
-        self.assertEqual(__, there_can_only_be_only_one)
+        self.assertEqual(set(['MacLeod', 'Ramirez', 'Malcolm', 'Matunas']), there_can_only_be_only_one)
 
     def test_sets_are_unordered(self):
-        self.assertEqual(set([__, __, __, __, __]), set('12345'))
+        self.assertEqual(set(['5', '4', '3', '2', '1']), set('12345'))
         
     def test_convert_the_set_into_a_list_to_sort_it(self):
-        self.assertEqual(__, sorted(set('13245')))
+        self.assertEqual(['1', '2', '3', '4', '5'], sorted(set('13245')))
         
     # ------------------------------------------------------------------
 
     def chars_in(self, a_set):
-        return ''.join(sorted(a_set))
+        return ' '.join(sorted(a_set))
 
     def test_set_have_arithmetic_operators(self):
         good_guy = set('macleod')
         bad_guy = set('mutunas')
         
-        self.assertEqual(__, self.chars_in(good_guy - bad_guy))
-        self.assertEqual(__, self.chars_in(good_guy | bad_guy))
-        self.assertEqual(__, self.chars_in(good_guy & bad_guy))
-        self.assertEqual(__, self.chars_in(good_guy ^ bad_guy))
+        self.assertEqual('c d e l o', self.chars_in(good_guy - bad_guy))
+        self.assertEqual('a c d e l m n o s t u', self.chars_in(good_guy | bad_guy))
+        self.assertEqual('a m', self.chars_in(good_guy & bad_guy))
+        self.assertEqual('c d e l n o s t u', self.chars_in(good_guy ^ bad_guy))
 
     # ------------------------------------------------------------------
 
     def test_we_can_query_set_membership(self):
-        self.assertEqual(__, 127 in set([127, 0, 0, 1]))
-        self.assertEqual(__, 'cow' not in set('apocalypse now'))
+        self.assertEqual(True, 127 in set([127, 0, 0, 1]))
+        self.assertEqual(True, 'cow' not in set('apocalypse now'))
         
     def test_we_can_compare_subsets(self):
-        self.assertEqual(__, set('cake') <= set('cherry cake'))
-        self.assertEqual(__, set('cake').issubset(set('cherry cake')))
+        self.assertEqual(True, set('cake') <= set('cherry cake'))
+        self.assertEqual(True, set('cake').issubset(set('cherry cake')))
         
-        self.assertEqual(__, set('cake') > set('pie'))
+        self.assertEqual(False, set('cake') > set('pie'))
