@@ -19,7 +19,7 @@
 #
 def triangle(a, b, c):
     # DELETE 'PASS' AND WRITE THIS CODE
-    if(a+b>c and a-b<c):
+    if(a+b>c and a+c>b and b+c>a and a-b<c and a-c<b and b-c<a):
         if(a==b and b==c):
             return 'equilateral'
         elif(a==b or b==c or a==c):
@@ -27,7 +27,7 @@ def triangle(a, b, c):
         else:
             return 'scalene'
     else:
-        return 'Can\'t make up a triangle.'
+        raise TriangleError('TriangleError')
 
 
 # Error class used in part 2.  No need to change this code.
