@@ -28,7 +28,7 @@ class AboutGenerators(Koan):
         self.assertEqual(2, num_list[0])
         
         # A generator has to be iterated through.
-#        self.assertRaises(2, num_generator[0]) # Evaluates num_generator[0]
+#        self.assertRaises(RuntimeError, num_generator[0]) # Evaluates num_generator[0]
         self.assertEqual(2, list(num_generator)[0]) # This works though
         
         # Both list comprehensions and generators can be iterated
@@ -106,7 +106,7 @@ class AboutGenerators(Koan):
         #       section of http://www.python.org/dev/peps/pep-0342/
         next(generator)
 
-        self.assertEqual(__, generator.send(1 + 2))
+        self.assertEqual(3, generator.send(1 + 2))
 
     def test_before_sending_a_value_to_a_generator_next_must_be_called(self):
         generator = self.generator_with_coroutine()
@@ -114,7 +114,7 @@ class AboutGenerators(Koan):
         try:
             generator.send(1 + 2)
         except TypeError as ex:
-            self.assertMatch(__, ex[0])
+            self.assertMatch("can't send non-None value to a just-started generator", ex[0])
 
     # ------------------------------------------------------------------
     
@@ -132,11 +132,11 @@ class AboutGenerators(Koan):
                          
         generator2 = self.yield_tester()
         next(generator2)
-        self.assertEqual(__, next(generator2))
+        self.assertEqual('no value', next(generator2))
 
     def test_send_none_is_equivelant_to_next(self):
         generator = self.yield_tester()
         
         next(generator)
         # 'next(generator)' is exactly equivelant to 'generator.send(None)'
-        self.assertEqual(__, generator.send(None))
+        self.assertEqual('no value', generator.send(None))
